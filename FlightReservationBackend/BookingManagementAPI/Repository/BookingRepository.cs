@@ -26,7 +26,8 @@ namespace BookingManagementAPI.Repository
             if (bookingDetailsDto != null)
             {
                 BookingDetails bookingDetails = _mapper.Map<BookingDetailsDto, BookingDetails>(bookingDetailsDto);
-                bookingDetails.PNR = Guid.NewGuid().ToString();
+                Random random = new Random();
+                bookingDetails.PNR = random.Next(100000, 999999).ToString();
                 _db.BookingDetails.Add(bookingDetails);
                 await _db.SaveChangesAsync();
                 var BookedID = bookingDetails.BookingID;
@@ -62,9 +63,42 @@ namespace BookingManagementAPI.Repository
             }
         }
 
-        public Task<bool> CancelBookedFlight(string PNR)
+        public async Task<bool> CancelBookedFlight(string PNR)
         {
-            throw new NotImplementedException();
+            await using var _db = new ApplicationDbContext(_dbContext);
+
+            try
+            {
+                BookingDetails airline = await _db.BookingDetails.FirstOrDefaultAsync(u => u.PNR == PNR);
+                if (airline == null)
+                {
+                    return false;
+                }
+                airline.IsCancelled = true;
+                _db.BookingDetails.Update(airline);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<BookingDetailsDto>> GetBookingDetailsList(string Email)
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+
+            IEnumerable<BookingDetails> BookingList = await _db.BookingDetails.Where(x=>x.Email==Email).ToListAsync();
+            return _mapper.Map<List<BookingDetailsDto>>(BookingList);
+        }
+
+        public async Task<List<BookingDetailsDto>> GetBookingDetailsListbyId(int Id)
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+
+            IEnumerable<BookingDetails> BookingList = await _db.BookingDetails.Where(x => x.CreatedUserID == Id).OrderByDescending(x=>x.CreatedDate).ToListAsync();
+            return _mapper.Map<List<BookingDetailsDto>>(BookingList);
         }
     }
 }

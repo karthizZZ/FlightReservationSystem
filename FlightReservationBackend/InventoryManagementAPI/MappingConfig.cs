@@ -25,6 +25,7 @@ namespace InventoryManagementAPI
                 config.CreateMap<AirlineScheduleMasterDto, AirlineScheduleMaster>()
                 .ReverseMap();
                 config.CreateMap<AirlineSearch, AirlineSearchDto>().ReverseMap();
+                config.CreateMap<Airport, AirportDto>().ReverseMap();
             });
 
             return mappingConfig;

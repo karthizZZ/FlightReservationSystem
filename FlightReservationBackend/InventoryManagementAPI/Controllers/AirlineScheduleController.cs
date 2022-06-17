@@ -2,6 +2,7 @@
 using InventoryManagementAPI.Models.Dto;
 using InventoryManagementAPI.RabbitMQSender;
 using InventoryManagementAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace InventoryManagementAPI.Controllers
             this._response = new ResponseDto();
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("Add")]
         [HttpPost]
         public async Task<object> Add([FromBody]AirlineScheduleMasterDto airlineSchedule)
@@ -43,6 +45,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("Update")]
         [HttpPut]
         public async Task<object> Update([FromBody] AirlineScheduleMasterDto airlineScheduleDto)
@@ -61,6 +64,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Delete/{id}")]
         public async Task<object> Delete(int id)
@@ -79,6 +83,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Get/{id}")]
         public async Task<object> Get(int id)
@@ -97,6 +102,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Get")]
         public async Task<object> Get()
@@ -115,6 +121,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("Search")]
         public async Task<object> GetSearchResult([FromBody] SearchInputDto searchInput)
@@ -133,37 +140,16 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpPost()]
         [Route("BookSchedule")]
         public async Task<object> BookSchedule([FromBody]BookingInputDto bookingInput)
         {
             try
             {
-                //CartDto cartDto = await _cartRepository.GetCartByUserId(checkoutHeader.UserId);
-                //if (cartDto == null)
-                //{
-                //    return BadRequest();
-                //}
-
-                //if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
-                //{
-                //    CouponDto coupon = await _couponRepository.GetCoupon(checkoutHeader.CouponCode);
-                //    if (checkoutHeader.DiscountTotal != coupon.DiscountAmount)
-                //    {
-                //        _response.IsSuccess = false;
-                //        _response.ErrorMessages = new List<string>() { "Coupon Price has changed, please confirm" };
-                //        _response.DisplayMessage = "Coupon Price has changed, please confirm";
-                //        return _response;
-                //    }
-                //}
-
-                //checkoutHeader.CartDetails = cartDto.CartDetails;
-                //logic to add message to process order.
-                //await _messageBus.PublishMessage(checkoutHeader, "checkoutqueue");
-
-                ////rabbitMQ
+                
                 _rabbitMQBookingMessageSender.SendMessage(bookingInput, "bookingqueue");
-                //await _cartRepository.ClearCart(checkoutHeader.UserId);
+                _response.IsSuccess = true;
             }
             catch (Exception ex)
             {

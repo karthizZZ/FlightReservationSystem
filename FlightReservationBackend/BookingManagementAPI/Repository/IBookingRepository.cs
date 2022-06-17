@@ -11,5 +11,10 @@ namespace BookingManagementAPI.Repository
         Task<bool> BookFlight(BookingDetailsDto bookingDetailsDto);
 
         Task<bool> CancelBookedFlight(string PNR);
+
+        Task<List<BookingDetailsDto>> GetBookingDetailsList(string Email);
+
+        Task<List<BookingDetailsDto>> GetBookingDetailsListbyId(int Id);
+
     }
 }

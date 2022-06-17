@@ -12,7 +12,7 @@ namespace BookingManagementAPI.Models
 
         public int AirlineID { get; set; }
 
-        public int FlightNumber { get; set; }
+        public string FlightNumber { get; set; }
 
         public string AirlineName { get; set; }
 
@@ -35,6 +35,18 @@ namespace BookingManagementAPI.Models
         public int CreatedUserID { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public string FromAirport { get; set; }
+
+        public string ToAirport { get; set; }
+
+        public string FromLocation { get; set; }
+
+        public string ToLocation { get; set; }
+
+        public double TicketCost { get; set; }
+
+        public double Tax { get; set; }
 
         public List<BookingPassengerRelnDto> PassengerList { get; set; }
 

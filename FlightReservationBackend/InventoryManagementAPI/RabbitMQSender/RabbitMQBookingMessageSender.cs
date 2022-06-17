@@ -49,7 +49,7 @@ namespace InventoryManagementAPI.RabbitMQSender
             }
             catch (Exception)
             {
-                //log exception
+
             }
         }
 

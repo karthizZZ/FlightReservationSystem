@@ -15,5 +15,7 @@ namespace InventoryManagementAPI.Repository
         Task<AirlineDto> CreateUpdateAirline(AirlineDto airlineDto);
 
         Task<bool> BlockAirline(int AirlineID);
+
+        Task<IEnumerable<AirportDto>> GetAirports();
     }
 }

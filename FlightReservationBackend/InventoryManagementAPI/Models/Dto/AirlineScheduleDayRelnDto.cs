@@ -10,5 +10,7 @@ namespace InventoryManagementAPI.Models.Dto
         public int AirlineScheduleID { get; set; }
 
         public string weekDay { get; set; }
+
+        public int id { get; set; }
     }
 }

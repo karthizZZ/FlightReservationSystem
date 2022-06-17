@@ -1,5 +1,6 @@
 ﻿using InventoryManagementAPI.Models.Dto;
 using InventoryManagementAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace InventoryManagementAPI.Controllers
             this._response = new ResponseDto();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Get")]
         public async Task<object> Get()
@@ -38,6 +40,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("Get/{id}")]
         public async Task<object> Get(int id)
@@ -56,6 +59,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("Add")]
         public async Task<object> Post([FromBody] AirlineDto airlineDto)
@@ -74,6 +78,7 @@ namespace InventoryManagementAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Update")]
         public async Task<object> Put([FromBody] AirlineDto airlineDto)
@@ -97,6 +102,7 @@ namespace InventoryManagementAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("Block/{id}")]
         public async Task<object> Block(int id)
@@ -105,6 +111,25 @@ namespace InventoryManagementAPI.Controllers
             {
                 bool isSuccess = await _airlineRepository.BlockAirline(id);
                 _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                     = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetAirports")]
+        public async Task<object> GetAirports()
+        {
+            try
+            {
+                IEnumerable<AirportDto> airportDto = await _airlineRepository.GetAirports();
+                _response.Result = airportDto;
             }
             catch (Exception ex)
             {

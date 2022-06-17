@@ -67,5 +67,11 @@ namespace InventoryManagementAPI.Repository
             IEnumerable<Airline> AirlineList = await _db.Airline.ToListAsync();
             return _mapper.Map<List<AirlineDto>>(AirlineList);
         }
+
+        public async Task<IEnumerable<AirportDto>> GetAirports()
+        {
+            IEnumerable<Airport> AirportList = await _db.Airport.ToListAsync();
+            return _mapper.Map<List<AirportDto>>(AirportList);
+        }
     }
 }

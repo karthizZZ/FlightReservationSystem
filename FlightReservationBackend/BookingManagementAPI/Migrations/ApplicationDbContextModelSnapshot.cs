@@ -44,8 +44,14 @@ namespace BookingManagementAPI.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FlightNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("FlightNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FromAirport")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FromLocation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("bit");
@@ -63,6 +69,18 @@ namespace BookingManagementAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SeatType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Tax")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TicketCost")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ToAirport")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookingID");
