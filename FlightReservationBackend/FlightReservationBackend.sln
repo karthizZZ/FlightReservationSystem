@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingManagementAPI", "Boo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementAPI", "UserManagementAPI\UserManagementAPI.csproj", "{F11F7D1E-BEEF-4FA7-9D85-94982EF770BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGatewayProject", "..\..\..\FlightBooking\FlightBookingBackend\APIGatewayProject\APIGatewayProject.csproj", "{951F1B52-DABC-49C5-9D7C-8FCA92070196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGatewayProject", "APIGatewayProject\APIGatewayProject.csproj", "{45C800E7-BD0E-41F4-9F3A-56518586CF82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{F11F7D1E-BEEF-4FA7-9D85-94982EF770BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F11F7D1E-BEEF-4FA7-9D85-94982EF770BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F11F7D1E-BEEF-4FA7-9D85-94982EF770BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{951F1B52-DABC-49C5-9D7C-8FCA92070196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{951F1B52-DABC-49C5-9D7C-8FCA92070196}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{951F1B52-DABC-49C5-9D7C-8FCA92070196}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{951F1B52-DABC-49C5-9D7C-8FCA92070196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C800E7-BD0E-41F4-9F3A-56518586CF82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C800E7-BD0E-41F4-9F3A-56518586CF82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C800E7-BD0E-41F4-9F3A-56518586CF82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C800E7-BD0E-41F4-9F3A-56518586CF82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
